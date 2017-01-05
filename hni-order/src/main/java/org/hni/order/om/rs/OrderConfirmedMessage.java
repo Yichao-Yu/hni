@@ -62,8 +62,9 @@ public class OrderConfirmedMessage {
         public OrderConfirmedMessageAttachment() {
         }
 
-        public OrderConfirmedMessageAttachment(String userName, String titleLink, String orderedItem, String orderedQuantity, Long timestamp) {
-            title = "Please place the order for " + userName;
+        public OrderConfirmedMessageAttachment(String userName, String providerName, String titleLink, String orderedItem,
+                                               String orderedQuantity, Long timestamp) {
+            title = "Please place the order for " + userName + " from " + providerName;
             this.titleLink = titleLink;
             fields = new ArrayList<>(3);
             fields.add(new AttachementField("Ordered item", orderedItem));

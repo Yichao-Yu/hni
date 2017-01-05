@@ -1,7 +1,6 @@
 package org.hni.order.service.rs.client;
 
 import org.hni.order.om.rs.OrderConfirmedMessage;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -22,11 +21,11 @@ public class SlackWebHookClientIntTest {
     private SlackWebHookClient client;
 
     @Test
-    @Ignore
     public void testSendAlert() throws Exception {
         OrderConfirmedMessage.OrderConfirmedMessageAttachment attachment =
                 new OrderConfirmedMessage.OrderConfirmedMessageAttachment(
                         "John Doe",
+                        "Taco Bell",
                         "https://link.to.order.place.page/",
                         "chicken soft tacos",
                         "2",

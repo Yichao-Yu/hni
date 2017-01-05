@@ -5,6 +5,8 @@ import org.hni.order.om.Order;
 import org.hni.order.om.OrderItem;
 import org.hni.order.om.type.OrderStatus;
 import org.hni.provider.om.MenuItem;
+import org.hni.provider.om.Provider;
+import org.hni.provider.om.ProviderLocation;
 import org.hni.user.om.User;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -32,6 +34,9 @@ public class DefaultOrderProcessIntTest {
     private OrderProcessor orderProcessor;
 
     @Inject
+    private OrderService orderService;
+
+    @Inject
     private LockingService<RedissonClient> redissonClient;
 
     @Test
@@ -48,10 +53,15 @@ public class DefaultOrderProcessIntTest {
     }
 
     @Test
-    @Ignore
+    public void testOrderConfirm() throws InterruptedException {
+        orderProcessor.processMessage(10L, "CONFIRM");
+        Thread.sleep(10000L);
+    }
+
+    @Test
     public void testOrderEventConsumer() throws InterruptedException {
         RRemoteService remoteService = redissonClient.getNativeClient().getRemoteService();
-        OrderEventConsumer orderEventConsumer = remoteService.get(OrderEventConsumer.class, RemoteInvocationOptions.defaults().noResult());
+
         Order order = new Order();
         order.setOrderDate(new Date());
         order.setStatus(OrderStatus.OPEN);
@@ -65,6 +75,13 @@ public class DefaultOrderProcessIntTest {
         item.setMenuItem(new MenuItem("chicken soft tacos, test meal", null, null, null));
         items.add(item);
         order.setOrderItems(items);
+        ProviderLocation providerLocation = new ProviderLocation();
+        Provider provider = new Provider();
+        provider.setName("Provider name");
+        providerLocation.setProvider(provider);
+        order.setProviderLocation(providerLocation);
+
+        OrderEventConsumerAsync orderEventConsumer = remoteService.get(OrderEventConsumerAsync.class, RemoteInvocationOptions.defaults().noResult());
         orderEventConsumer.process(order);
         Thread.sleep(10000L);
     }

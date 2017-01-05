@@ -172,3 +172,16 @@ insert into payment_instruments values(7, 1, 'gift', '7', '7000-0000-0000-0001',
 insert into payment_instruments values(8, 1, 'gift', '8', '8000-0000-0000-0001','A', 10, 10, null, '1234');
 insert into payment_instruments values(9, 1, 'gift', '9', '9000-0000-0000-0001','A', 10, 10, null, '1234');
 insert into payment_instruments values(10, 1, 'gift', '10', '1100-0000-0000-0001','A', 10, 10, null, '1234');
+
+
+truncate table partial_orders;
+insert into partial_orders values(1, 10, 1, 2, 1, 1, 4, null);
+
+truncate table partial_orders_menu_items;
+insert into partial_orders_menu_items values(1, 1);
+
+truncate table partial_orders_provider_locations;
+insert into partial_orders_provider_locations values(1, 1);
+
+truncate table partial_orders_menu_selections;
+insert into partial_orders_menu_selections values(1, 1);

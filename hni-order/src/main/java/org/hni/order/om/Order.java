@@ -170,5 +170,4 @@ public class Order implements Persistable, Serializable {
 				+ ", statusId=" + statusId + ", user=" + user + ", providerLocation=" + providerLocation
 				+ ", orderItems=" + orderItems + "]";
 	}
-	
 }

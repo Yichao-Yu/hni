@@ -51,6 +51,7 @@ public class OrderEventConsumerImpl implements OrderEventConsumer {
         OrderConfirmedMessage.OrderConfirmedMessageAttachment attachment =
                 new OrderConfirmedMessage.OrderConfirmedMessageAttachment(
                         userName,
+                        "",//order.getProviderLocation().getProvider().getName(),
                         hniHomepage,
                         orderItem.getMenuItem().getName(),
                         orderItem.getQuantity().toString(),
